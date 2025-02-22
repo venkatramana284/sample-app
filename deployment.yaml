@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-microservice
+  template:
+    metadata:
+      labels:
+        app: sample-microservice
+    spec:
+      containers:
+      - name: sample-microservice
+        image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+        ports:
+        - containerPort: 3000
